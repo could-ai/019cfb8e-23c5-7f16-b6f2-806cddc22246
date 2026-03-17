@@ -10,16 +10,18 @@ class GastronomyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Gastronomy Poster',
+      title: 'Gastronomy Poster: Brazil',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFBC002D), // Japan Red
+          seedColor: const Color(0xFF009739), // Brazilian Green
+          secondary: const Color(0xFFFEDD00), // Brazilian Yellow
+          tertiary: const Color(0xFF012169), // Brazilian Blue
           brightness: Brightness.light,
         ),
         useMaterial3: true,
         textTheme: const TextTheme(
-          headlineLarge: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFBC002D)),
+          headlineLarge: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF009739)),
           titleLarge: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
@@ -39,17 +41,17 @@ class PosterScreen extends StatelessWidget {
     final isDesktop = MediaQuery.of(context).size.width > 800;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
+      backgroundColor: const Color(0xFFF4F7F5),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 200.0,
+            expandedHeight: 220.0,
             floating: false,
             pinned: true,
-            backgroundColor: const Color(0xFF1A1A1A),
+            backgroundColor: const Color(0xFF009739),
             flexibleSpace: FlexibleSpaceBar(
               title: const Text(
-                'Gastronomy of Japan',
+                'Gastronomy of Brazil',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -59,11 +61,11 @@ class PosterScreen extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Abstract background pattern representing Japan
+                  // Abstract background pattern representing Brazil
                   Container(
-                    color: const Color(0xFFBC002D),
+                    color: const Color(0xFF009739), // Green background
                     child: CustomPaint(
-                      painter: SunPainter(),
+                      painter: BrazilFlagPainter(),
                     ),
                   ),
                   Container(
@@ -86,7 +88,7 @@ class PosterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
-                    'A Visual Exploration of Influences on Japanese Food Culture',
+                    'A Visual Exploration of Influences on Brazilian Food Culture',
                     style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, color: Colors.black54),
                     textAlign: TextAlign.center,
                   ),
@@ -125,33 +127,33 @@ class PosterScreen extends StatelessWidget {
     final influences = [
       {
         'title': 'Cultures, Religions & Migration',
-        'icon': Icons.temple_buddhist,
-        'content': 'Shinto and Buddhism fostered a deep respect for nature and seasonal ingredients (Washoku). Buddhist practices introduced vegetarianism and tofu. Portuguese migration in the 16th century introduced deep-frying techniques, birthing Tempura.',
+        'icon': Icons.people_alt,
+        'content': 'A rich melting pot: Indigenous roots provided cassava and corn. Portuguese colonizers brought sugar, citrus, and pork. African slaves introduced dendê (palm oil), okra, and the foundations of Feijoada. Later migrations (Italian, Japanese, Lebanese) heavily shaped urban food scenes like São Paulo.',
       },
       {
         'title': 'Science & Technology',
         'icon': Icons.science,
-        'content': 'Japan mastered fermentation science early on (using Koji mold for soy sauce, miso, and sake). Modern technology revolutionized dining with precision rice cookers, automated sushi conveyor belts (Kaiten-zushi), and ubiquitous vending machines.',
+        'content': 'Agricultural science (like Embrapa) transformed the acidic Cerrado biome into one of the world\\'s most productive agricultural regions. Modernization in sugarcane processing has made Brazil a leader in both sugar production and ethanol biofuel.',
       },
       {
         'title': 'Lifestyle, Media & Individuals',
-        'icon': Icons.movie,
-        'content': 'Fast-paced urban life popularized Bento boxes and high-quality fast food like Ramen. Media, including Anime, Manga, and shows like "Iron Chef", have massively globalized Japanese food culture and aesthetics.',
+        'icon': Icons.restaurant,
+        'content': 'Fast-paced urban lifestyles popularized "por quilo" (pay-by-weight) buffet restaurants, offering diverse daily meals. Media and renowned chefs like Alex Atala have elevated indigenous Amazonian ingredients to global fine-dining status.',
       },
       {
         'title': 'Geography & Transportation',
         'icon': Icons.map,
-        'content': 'As a mountainous island nation with limited arable land, Japan relies heavily on seafood, seaweed, and terraced rice farming. The Bullet Train (Shinkansen) network popularized "Ekiben" (station bento boxes), highlighting regional specialties.',
+        'content': 'Vast biomes (Amazon, Cerrado, Pampas, Atlantic Forest) create distinct regional cuisines. The heavy reliance on road transportation makes roadside diners and "Churrascarias" (steakhouses) a vital part of the travel and food culture.',
       },
       {
         'title': 'Emerging Trends',
         'icon': Icons.trending_up,
-        'content': 'Current trends include the rise of plant-based sushi alternatives, modern Izakaya fusion concepts blending Western and Japanese techniques, and the global obsession with Matcha-flavored desserts and beverages.',
+        'content': 'There is a massive rediscovery of native biomes. Ingredients like tucupi, jambu (a mouth-numbing herb), and various native fruits are trending globally. Plant-based adaptations of traditional heavy meat dishes are also rapidly growing in cities.',
       },
       {
         'title': 'Sustainability',
         'icon': Icons.eco,
-        'content': 'Rooted in the traditional "Mottainai" (no waste) philosophy. There is a strong focus on nose-to-tail fish usage, seasonal eating to reduce carbon footprints, and growing movements towards sustainable seafood sourcing.',
+        'content': 'A critical issue due to Amazon deforestation for cattle ranching and soy. However, there is a growing movement towards agroforestry, supporting indigenous producers, and sustainable harvesting of native products like Açaí and Brazil nuts.',
       },
     ];
 
@@ -162,8 +164,8 @@ class PosterScreen extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: crossAxisCount == 1 ? 2.5 : 1.2,
-        mainAxisExtent: 220,
+        childAspectRatio: crossAxisCount == 1 ? 2.5 : 1.15,
+        mainAxisExtent: 230,
       ),
       itemCount: influences.length,
       itemBuilder: (context, index) {
@@ -222,7 +224,7 @@ class PosterScreen extends StatelessWidget {
   Widget _buildDishPairingCard(BuildContext context) {
     return Card(
       elevation: 4,
-      color: const Color(0xFF2C2C2C),
+      color: const Color(0xFF1A1A1A),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -231,7 +233,7 @@ class PosterScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.restaurant_menu, color: Colors.amber, size: 32),
+                const Icon(Icons.restaurant_menu, color: Color(0xFFFEDD00), size: 32),
                 const SizedBox(width: 12),
                 Text(
                   'Featured Pairing',
@@ -245,24 +247,24 @@ class PosterScreen extends StatelessWidget {
             const Divider(color: Colors.white24, height: 32, thickness: 1),
             _buildPairingItem(
               context,
-              title: 'The Dish: Traditional Nigiri Sushi',
-              description: 'A delicate slice of raw, fresh seafood draped over a small pod of vinegared rice. It represents the pinnacle of Japanese minimalism, relying entirely on the quality of ingredients and the chef\'s knife skills.',
-              icon: Icons.set_meal,
+              title: 'The Dish: Feijoada',
+              description: 'Considered Brazil\\'s national dish. A rich, slow-cooked stew of black beans and various cuts of salted and smoked pork. It is traditionally served with white rice, toasted cassava flour (farofa), sautéed collard greens, and orange slices.',
+              icon: Icons.soup_kitchen,
             ),
             const SizedBox(height: 24),
             _buildPairingItem(
               context,
-              title: 'The Beverage: Junmai Sake',
-              description: 'A premium Japanese rice wine brewed purely from rice, water, yeast, and koji mold, with no added alcohol.',
-              icon: Icons.wine_bar,
+              title: 'The Beverage: Caipirinha',
+              description: 'Brazil\\'s national cocktail, made with Cachaça (fermented sugarcane juice liquor), muddled fresh limes, sugar, and ice.',
+              icon: Icons.local_bar,
             ),
             const SizedBox(height: 24),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.1),
+                color: const Color(0xFFFEDD00).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.amber.withOpacity(0.5)),
+                border: Border.all(color: const Color(0xFFFEDD00).withOpacity(0.5)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -270,14 +272,14 @@ class PosterScreen extends StatelessWidget {
                   const Text(
                     'Why this pairing?',
                     style: TextStyle(
-                      color: Colors.amber,
+                      color: Color(0xFFFEDD00),
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Junmai Sake is brewed from rice, making it a natural companion to the vinegared rice of the sushi. Its clean, slightly dry, and umami-rich profile cleanses the palate between bites and enhances the natural sweetness and umami of the raw fish without overpowering its delicate flavors.',
+                    'Feijoada is an incredibly rich, heavy, and salty dish due to the preserved meats and beans. The Caipirinha is the perfect counterpoint: its high acidity from the fresh limes and the sharp bite of the Cachaça cut right through the fat of the pork. The sweetness balances the saltiness, acting as a refreshing palate cleanser between heavy bites.',
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.9),
                       height: 1.5,
@@ -326,18 +328,32 @@ class PosterScreen extends StatelessWidget {
   }
 }
 
-// Custom painter to draw a subtle rising sun pattern in the background
-class SunPainter extends CustomPainter {
+// Custom painter to draw an abstract representation of the Brazilian flag (Yellow Rhombus & Blue Circle)
+class BrazilFlagPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withOpacity(0.1)
+    final yellowPaint = Paint()
+      ..color = const Color(0xFFFEDD00).withOpacity(0.15)
       ..style = PaintingStyle.fill;
 
+    final bluePaint = Paint()
+      ..color = const Color(0xFF012169).withOpacity(0.2)
+      ..style = PaintingStyle.fill;
+
+    // Draw Yellow Rhombus
+    final path = Path();
+    path.moveTo(size.width / 2, size.height * 0.1); // Top
+    path.lineTo(size.width * 0.9, size.height / 2); // Right
+    path.lineTo(size.width / 2, size.height * 0.9); // Bottom
+    path.lineTo(size.width * 0.1, size.height / 2); // Left
+    path.close();
+    canvas.drawPath(path, yellowPaint);
+
+    // Draw Blue Circle
     canvas.drawCircle(
       Offset(size.width / 2, size.height / 2),
-      size.height * 0.8,
-      paint,
+      size.height * 0.25,
+      bluePaint,
     );
   }
 
